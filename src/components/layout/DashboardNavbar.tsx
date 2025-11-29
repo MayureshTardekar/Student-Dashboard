@@ -1,5 +1,5 @@
-import { Search, Bell, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 export const DashboardNavbar = () => {
   return (
@@ -15,7 +15,8 @@ export const DashboardNavbar = () => {
         </div>
       </div>
       
-      <div className="flex items-center gap-4">
+      {/* NOTIFICATION BELL AND USER PROFILE - COMMENTED OUT (not in assignment requirements) */}
+      {/* <div className="flex items-center gap-4">
         <button className="relative p-2 hover:bg-muted rounded-lg transition-colors">
           <Bell className="w-5 h-5 text-foreground" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
@@ -30,7 +31,7 @@ export const DashboardNavbar = () => {
             <User className="w-5 h-5 text-primary-foreground" />
           </div>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };

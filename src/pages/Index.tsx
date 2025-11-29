@@ -1,17 +1,27 @@
-import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
-import { DashboardNavbar } from "@/components/layout/DashboardNavbar";
-import { KPICard } from "@/components/dashboard/KPICard";
-import { SubjectMarksChart } from "@/components/dashboard/SubjectMarksChart";
+import { AddStudentDialog } from "@/components/dashboard/AddStudentDialog";
 import { AttendancePieChart } from "@/components/dashboard/AttendancePieChart";
+import { KPICard } from "@/components/dashboard/KPICard";
 import { MonthlyPerformanceChart } from "@/components/dashboard/MonthlyPerformanceChart";
 import { StudentsTable } from "@/components/dashboard/StudentsTable";
-import { TrendingUp, Users, CheckCircle2 } from "lucide-react";
-import { students } from "@/data/studentData";
+import { SubjectMarksChart } from "@/components/dashboard/SubjectMarksChart";
+import { DashboardNavbar } from "@/components/layout/DashboardNavbar";
+import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
+import { Button } from "@/components/ui/button";
+import { useStudents } from "@/contexts/StudentContext";
+import { CheckCircle2, Plus, TrendingUp, Users } from "lucide-react";
+import { useState } from "react";
 
 const Index = () => {
+  const { students } = useStudents();
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+
   // Calculate KPIs
-  const avgAttendance = (students.reduce((acc, s) => acc + s.attendance, 0) / students.length).toFixed(1);
-  const avgMarks = (students.reduce((acc, s) => acc + s.marks, 0) / students.length).toFixed(1);
+  const avgAttendance = students.length > 0 
+    ? (students.reduce((acc, s) => acc + s.attendance, 0) / students.length).toFixed(1)
+    : "0.0";
+  const avgMarks = students.length > 0
+    ? (students.reduce((acc, s) => acc + s.marks, 0) / students.length).toFixed(1)
+    : "0.0";
   const passCount = students.filter(s => s.status === "Pass").length;
   const failCount = students.filter(s => s.status === "Fail").length;
 
@@ -71,6 +81,17 @@ const Index = () => {
           <StudentsTable />
         </main>
       </div>
+
+      {/* Floating Action Button */}
+      <Button
+        onClick={() => setIsAddDialogOpen(true)}
+        className="fixed bottom-8 right-8 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+        size="icon"
+      >
+        <Plus className="h-6 w-6" />
+      </Button>
+
+      <AddStudentDialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen} />
     </div>
   );
 };

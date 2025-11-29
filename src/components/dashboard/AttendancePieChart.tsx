@@ -1,8 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { students } from "@/data/studentData";
+import { useStudents } from "@/contexts/StudentContext";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 export const AttendancePieChart = () => {
+  const { students } = useStudents();
+  
   const passCount = students.filter(s => s.status === "Pass").length;
   const failCount = students.filter(s => s.status === "Fail").length;
   
