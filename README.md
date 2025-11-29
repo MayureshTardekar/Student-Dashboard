@@ -1,4 +1,4 @@
-# Lab 8: Student Performance Monitoring Dashboard
+ # Lab 8: Student Performance Monitoring Dashboard
 
 A React-based student performance monitoring dashboard with data visualization and dynamic student management.
 
